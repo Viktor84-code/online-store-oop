@@ -1,3 +1,5 @@
+from src.product import Product
+
 class Category:
     """Класс для описания категории товаров."""
     category_count = 0
