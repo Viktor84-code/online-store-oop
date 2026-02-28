@@ -12,10 +12,21 @@ class Product:
 
     @price.setter
     def price(self, value):
-        """Сеттер с валидацией"""
         if value <= 0:
-            raise ValueError("Цена должна быть положительной")
-        self._price = value
+            print("Цена не должна быть нулевая или отрицательная")
+            return
+
+        # Если цена понижается - запрашиваем подтверждение
+        if value < self._price:
+            answer = input(f"Понизить цену с {self._price} до {value}? (y/n): ")
+            if answer.lower() == 'y':
+                self._price = value
+                print("Цена успешно изменена")
+            else:
+                print("Изменение цены отменено")
+        else:
+            # Цена повышается или не меняется
+            self._price = value
 
     @classmethod
     def new_product(cls, product_data: dict):
