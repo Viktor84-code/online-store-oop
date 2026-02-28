@@ -1,3 +1,4 @@
+import pytest
 import sys
 import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -40,3 +41,51 @@ def test_empty_category():
     category = Category("Пустая категория", "Описание", [])
     assert category.name == "Пустая категория"
     assert len(category.products) == 0
+
+
+def test_add_product():
+    """Тест добавления продукта"""
+    category = Category("Смартфоны", "Телефоны", [])
+    product = Product("iPhone", 100000, "Флагман", 5)
+
+    category.add_product(product)
+
+    assert len(category._products) == 1
+    assert Category.product_count > 0
+
+
+def test_add_product_wrong_type():
+    """Тест добавления не-Product"""
+    category = Category("Смартфоны", "Телефоны", [])
+
+    with pytest.raises(TypeError):
+        category.add_product("не продукт")
+
+
+def test_products_property():
+    """Тест геттера products"""
+    product = Product("iPhone", 100000, "Флагман", 5)
+    category = Category("Смартфоны", "Телефоны", [product])
+
+    assert isinstance(category.products, list)
+    assert category.products[0] == product
+
+
+def test_get_products_display():
+    """Тест форматированного вывода"""
+    product = Product("iPhone", 100000, "Флагман", 5)
+    category = Category("Смартфоны", "Телефоны", [product])
+
+    display = category.get_products_display()
+    assert "iPhone" in display
+    assert "100000 руб." in display
+    assert "Остаток: 5 шт." in display
+
+
+def test_products_count():
+    """Тест счетчика продуктов"""
+    product1 = Product("iPhone", 100000, "Флагман", 5)
+    product2 = Product("Samsung", 80000, "Флагман", 3)
+    category = Category("Смартфоны", "Телефоны", [product1, product2])
+
+    assert category.products_count == 2

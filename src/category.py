@@ -24,8 +24,8 @@ class Category:
     #  property для доступа к данным
     @property
     def products(self):
-        """Возвращает список товаров (сырые данные)"""
-        return self._products
+        """Возвращает список товаров (для тестов)"""
+        return self._products  # ← список, а не строка
 
     #  отдельный метод для форматированного вывода
     def get_products_display(self):

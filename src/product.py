@@ -1,8 +1,8 @@
 class Product:
     def __init__(self, name, price, description, quantity):
         self.name = name
-        self._price = price  # Приватная цена (подготовка к заданию 4)
         self.description = description
+        self._price = price
         self.quantity = quantity
 
     @property
@@ -12,11 +12,18 @@ class Product:
 
     @price.setter
     def price(self, value):
+        """Сеттер с валидацией (без подтверждения)"""
+        if value <= 0:
+            print("Цена не должна быть нулевая или отрицательная")
+            return
+        self._price = value
+
+    def set_price_with_confirmation(self, value):
+        """Установка цены с подтверждением при понижении (для дополнительного задания)"""
         if value <= 0:
             print("Цена не должна быть нулевая или отрицательная")
             return
 
-        # Если цена понижается - запрашиваем подтверждение
         if value < self._price:
             answer = input(f"Понизить цену с {self._price} до {value}? (y/n): ")
             if answer.lower() == 'y':
@@ -25,8 +32,8 @@ class Product:
             else:
                 print("Изменение цены отменено")
         else:
-            # Цена повышается или не меняется
             self._price = value
+
 
     @classmethod
     def new_product(cls, product_data: dict):
@@ -35,7 +42,7 @@ class Product:
             name=product_data["name"],
             price=product_data["price"],
             description=product_data["description"],
-            quantity=product_data["quantity"]
+           quantity=product_data["quantity"]
         )
 
     @classmethod
