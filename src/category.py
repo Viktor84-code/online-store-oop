@@ -15,7 +15,7 @@ class Category:
 
     def add_product(self, product):
         """Добавляет продукт в категорию"""
-        # Middle: можно добавить валидацию
+        #  можно добавить валидацию
         if not isinstance(product, Product):
             raise TypeError("Можно добавлять только объекты Product")
         self._products.append(product)
