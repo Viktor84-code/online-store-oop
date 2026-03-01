@@ -1,10 +1,13 @@
-import pytest
-import sys
 import os
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+import sys
+
+import pytest
+
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from src.category import Category
 from src.product import Product
+
 
 def test_category_creation():
     """Тест создания категории."""

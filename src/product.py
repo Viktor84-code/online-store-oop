@@ -26,14 +26,13 @@ class Product:
 
         if value < self._price:
             answer = input(f"Понизить цену с {self._price} до {value}? (y/n): ")
-            if answer.lower() == 'y':
+            if answer.lower() == "y":
                 self._price = value
                 print("Цена успешно изменена")
             else:
                 print("Изменение цены отменено")
         else:
             self._price = value
-
 
     @classmethod
     def new_product(cls, product_data: dict):
@@ -42,7 +41,7 @@ class Product:
             name=product_data["name"],
             price=product_data["price"],
             description=product_data["description"],
-           quantity=product_data["quantity"]
+            quantity=product_data["quantity"],
         )
 
     @classmethod

@@ -1,17 +1,16 @@
-import sys
 import os
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+import sys
+
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 import pytest
+
 from src.product import Product
 
 
 def test_product_creation():
     """Тест создания продукта."""
     product = Product(
-        name="Тестовый товар",
-        description="Тестовое описание",
-        price=1000.0,
-        quantity=5
+        name="Тестовый товар", description="Тестовое описание", price=1000.0, quantity=5
     )
 
     assert product.name == "Тестовый товар"
@@ -39,12 +38,7 @@ def test_price_setter_negative(capsys):
 
 def test_new_product():
     """Тест создания продукта из словаря"""
-    data = {
-        "name": "Xiaomi",
-        "price": 30000,
-        "description": "Смартфон",
-        "quantity": 10
-    }
+    data = {"name": "Xiaomi", "price": 30000, "description": "Смартфон", "quantity": 10}
     product = Product.new_product(data)
 
     assert product.name == "Xiaomi"
@@ -81,6 +75,7 @@ def test_str_method():
     product = Product("iPhone", 100000, "Флагман", 5)
 
     assert str(product) == "iPhone, 100000 руб. (остаток: 5)"
+
 
 def test_set_price_with_confirmation_higher(monkeypatch):
     """Тест повышения цены (без подтверждения)"""
