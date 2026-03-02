@@ -26,12 +26,7 @@ class Category:
     #  property для доступа к данным
     @property
     def products(self):
-        """Возвращает список товаров (для тестов)"""
-        return self._products  # ← список, а не строка
-
-    #  отдельный метод для форматированного вывода
-    def get_products_display(self):
-        """Возвращает отформатированную строку для отображения"""
+        """Возвращает строку со всеми продуктами по шаблону"""
         result = ""
         for product in self._products:
             result += f"{product.name}, {product.price} руб. Остаток: {product.quantity} шт.\n"

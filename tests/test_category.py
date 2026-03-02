@@ -1,23 +1,26 @@
 import os
 import sys
-
 import pytest
-
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from src.category import Category
 from src.product import Product
 
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
 
 def test_category_creation():
     """Тест создания категории."""
-    product = Product("Товар", "Описание", 100.0, 5)
+    product = Product("Товар", 100.0, "Описание", 5)
     category = Category("Категория", "Описание категории", [product])
 
     assert category.name == "Категория"
     assert category.description == "Описание категории"
-    assert len(category.products) == 1
-    assert category.products[0].name == "Товар"
+
+    # products теперь строка, проверяем наличие данных
+    products_str = category.products
+    assert "Товар" in products_str
+    assert "100.0 руб." in products_str
+    assert "Остаток: 5 шт." in products_str
 
 
 def test_category_counters():
@@ -30,11 +33,12 @@ def test_category_counters():
     product2 = Product("Товар 2", "Описание", 200.0, 2)
 
     category1 = Category("Категория 1", "Описание", [product1, product2])
+    _ = category1
     assert Category.category_count == 1
     assert Category.product_count == 2
 
     product3 = Product("Товар 3", "Описание", 300.0, 3)
-    category2 = Category("Категория 2", "Описание", [product3])
+    Category("Категория 2", "Описание", [product3])  # ← убрали category2 =
     assert Category.category_count == 2
     assert Category.product_count == 3
 
@@ -67,22 +71,16 @@ def test_add_product_wrong_type():
 
 def test_products_property():
     """Тест геттера products"""
-    product = Product("iPhone", 100000, "Флагман", 5)
+    product = Product("iPhone", 100000, "Флагман", 5)  # name, price, description, quantity
     category = Category("Смартфоны", "Телефоны", [product])
 
-    assert isinstance(category.products, list)
-    assert category.products[0] == product
-
-
-def test_get_products_display():
-    """Тест форматированного вывода"""
-    product = Product("iPhone", 100000, "Флагман", 5)
-    category = Category("Смартфоны", "Телефоны", [product])
-
-    display = category.get_products_display()
-    assert "iPhone" in display
-    assert "100000 руб." in display
-    assert "Остаток: 5 шт." in display
+    # Проверяем, что возвращается строка
+    products_str = category.products
+    assert isinstance(products_str, str)
+    assert "iPhone" in products_str
+    assert "100000 руб." in products_str
+    assert "Остаток: 5 шт." in products_str
+    assert products_str.endswith("\n")  # проверяем перенос строки в конце
 
 
 def test_products_count():
