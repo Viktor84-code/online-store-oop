@@ -42,4 +42,3 @@ class Category:
         """Название категории, количество продуктов: X шт."""
         total_quantity = sum(product.quantity for product in self._products)
         return f"{self.name}, количество продуктов: {total_quantity} шт."
-

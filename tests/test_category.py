@@ -1,5 +1,6 @@
 import os
 import sys
+
 import pytest
 
 from src.category import Category
@@ -71,7 +72,9 @@ def test_add_product_wrong_type():
 
 def test_products_property():
     """Тест геттера products"""
-    product = Product("iPhone", 100000, "Флагман", 5)  # name, price, description, quantity
+    product = Product(
+        "iPhone", 100000, "Флагман", 5
+    )  # name, price, description, quantity
     category = Category("Смартфоны", "Телефоны", [product])
 
     # Проверяем, что возвращается строка
