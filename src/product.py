@@ -61,3 +61,9 @@ class Product:
 
     def __str__(self):
         return f"{self.name}, {self.price} руб. Остаток: {self.quantity} шт."
+
+    def __add__(self, other):
+        """Сложение продуктов: цена * количество + цена * количество другого продукта"""
+        if not isinstance(other, Product):
+            raise TypeError("Можно складывать только Product с Product")
+        return (self.price * self.quantity) + (other.price * other.quantity)

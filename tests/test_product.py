@@ -1,5 +1,6 @@
 import os
 import sys
+import pytest
 
 from src.product import Product
 
@@ -73,7 +74,7 @@ def test_str_method():
     """Тест строкового представления"""
     product = Product("iPhone", 100000, "Флагман", 5)
 
-    assert str(product) == "iPhone, 100000 руб. (остаток: 5)"
+    assert str(product) == "iPhone, 100000 руб. Остаток: 5 шт."
 
 
 def test_set_price_with_confirmation_higher(monkeypatch):
@@ -81,3 +82,21 @@ def test_set_price_with_confirmation_higher(monkeypatch):
     product = Product("Товар", 100, "Описание", 5)  # name, price, description, quantity
     product.set_price_with_confirmation(150)
     assert product.price == 150
+
+
+def test_product_add():
+    """Тест сложения двух продуктов"""
+    product1 = Product("Товар1", 100, "Описание", 10)
+    product2 = Product("Товар2", 200, "Описание", 5)
+
+    result = product1 + product2
+    expected = (100 * 10) + (200 * 5)  # 1000 + 1000 = 2000
+    assert result == expected
+
+
+def test_product_add_wrong_type():
+    """Тест сложения с не-Product (должно вызывать TypeError)"""
+    product1 = Product("Товар1", 100, "Описание", 10)
+
+    with pytest.raises(TypeError):
+        product1 + "не товар"
