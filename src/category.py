@@ -39,4 +39,7 @@ class Category:
         return len(self._products)
 
     def __str__(self):
-        return f"Категория: {self.name} (товаров: {self.products_count})"
+        """Название категории, количество продуктов: X шт."""
+        total_quantity = sum(product.quantity for product in self._products)
+        return f"{self.name}, количество продуктов: {total_quantity} шт."
+

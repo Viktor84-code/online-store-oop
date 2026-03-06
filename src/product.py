@@ -60,4 +60,4 @@ class Product:
         return cls.new_product(product_data)
 
     def __str__(self):
-        return f"{self.name}, {self.price} руб. (остаток: {self.quantity})"
+        return f"{self.name}, {self.price} руб. Остаток: {self.quantity} шт."
