@@ -63,7 +63,9 @@ class Product:
         return f"{self.name}, {self.price} руб. Остаток: {self.quantity} шт."
 
     def __add__(self, other):
-        """Сложение продуктов: цена * количество + цена * количество другого продукта"""
         if not isinstance(other, Product):
             raise TypeError("Можно складывать только Product с Product")
+        if type(self) is not type(other):
+            raise TypeError(f"Нельзя складывать {type(self).__name__} с {type(other).__name__}")
         return (self.price * self.quantity) + (other.price * other.quantity)
+
