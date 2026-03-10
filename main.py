@@ -1,4 +1,4 @@
-from src import Product, Smartphone, LawnGrass, Category
+from src import Category, LawnGrass, Product, Smartphone
 
 if __name__ == '__main__':
     product1 = Product("Samsung Galaxy S23 Ultra", 180000.0, "256GB, Серый цвет, 200MP камера", 5)
@@ -91,7 +91,6 @@ if __name__ == '__main__':
     category_grass = Category("Газонная трава", "Различные виды газонной травы", [grass1, grass2])
 
     category_smartphones.add_product(smartphone3)
-
 
     print(category_smartphones.products)
 
