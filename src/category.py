@@ -1,3 +1,6 @@
+"""Модуль для работы с категориями товаров."""
+
+
 from src.product import Product
 
 
@@ -8,6 +11,7 @@ class Category:
     product_count = 0
 
     def __init__(self, name, description, products):
+        """Инициализация категории с названием, описанием и списком товаров."""
         self.name = name
         self.description = description
         self._products = products  # Приватный список (сырые данные)
@@ -16,17 +20,17 @@ class Category:
         Category.product_count += len(products)
 
     def add_product(self, product):
-        """Добавляет продукт в категорию"""
+        """Добавляет продукт в категорию (только Product и его наследников)."""
         #  можно добавить валидацию
         if not isinstance(product, Product):
-            raise TypeError("Можно добавлять только объекты Product")
+            raise TypeError("Можно добавлять только объекты Product или его наследников")
         self._products.append(product)
         Category.product_count += 1
 
     #  property для доступа к данным
     @property
     def products(self):
-        """Возвращает строку со всеми продуктами по шаблону"""
+        """Возвращает строку со всеми продуктами по шаблону."""
         result = ""
         for product in self._products:
             result += f"{product.name}, {product.price} руб. Остаток: {product.quantity} шт.\n"
@@ -35,7 +39,7 @@ class Category:
     #  свойство для количества товаров (без доступа к сырым данным)
     @property
     def products_count(self):
-        """Количество товаров в категории"""
+        """Количество товаров в категории."""
         return len(self._products)
 
     def __str__(self):

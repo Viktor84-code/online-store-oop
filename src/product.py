@@ -1,5 +1,11 @@
+"""Модуль для работы с продуктами и их наследниками."""
+
+
 class Product:
+    """Базовый класс для всех товаров."""
+
     def __init__(self, name, price, description, quantity):
+        """Инициализация продукта с названием, ценой, описанием и количеством."""
         self.name = name
         self.description = description
         self._price = price
@@ -7,19 +13,19 @@ class Product:
 
     @property
     def price(self):
-        """Геттер для цены"""
+        """Геттер для цены."""
         return self._price
 
     @price.setter
     def price(self, value):
-        """Сеттер с валидацией (без подтверждения)"""
+        """Сеттер с валидацией (без подтверждения)."""
         if value <= 0:
             print("Цена не должна быть нулевая или отрицательная")
             return
         self._price = value
 
     def set_price_with_confirmation(self, value):
-        """Установка цены с подтверждением при понижении (для дополнительного задания)"""
+        """Установка цены с подтверждением при понижении (для дополнительного задания)."""
         if value <= 0:
             print("Цена не должна быть нулевая или отрицательная")
             return
@@ -36,7 +42,7 @@ class Product:
 
     @classmethod
     def new_product(cls, product_data: dict):
-        """Создает новый продукт из словаря"""
+        """Создает новый продукт из словаря."""
         return cls(
             name=product_data["name"],
             price=product_data["price"],
@@ -46,7 +52,7 @@ class Product:
 
     @classmethod
     def new_product_with_check(cls, product_data: dict, existing_products=None):
-        """Создает продукт с проверкой на дубликаты"""
+        """Создает продукт с проверкой на дубликаты."""
         if existing_products:
             for product in existing_products:
                 if product.name == product_data["name"]:
@@ -60,10 +66,13 @@ class Product:
         return cls.new_product(product_data)
 
     def __str__(self):
+        """Возвращает строковое представление продукта."""
         return f"{self.name}, {self.price} руб. Остаток: {self.quantity} шт."
 
     def __add__(self, other):
-        """Сложение продуктов: цена * количество + цена * количество другого продукта"""
+        """Складывает общую стоимость двух продуктов (цена × количество)."""
         if not isinstance(other, Product):
             raise TypeError("Можно складывать только Product с Product")
+        if type(self) is not type(other):
+            raise TypeError(f"Нельзя складывать {type(self).__name__} с {type(other).__name__}")
         return (self.price * self.quantity) + (other.price * other.quantity)
