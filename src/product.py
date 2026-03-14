@@ -1,7 +1,10 @@
 """Модуль для работы с продуктами и их наследниками."""
 
 
-class Product:
+from src.base_product import BaseProduct  # ← добавили импорт
+
+
+class Product(BaseProduct):
     """Базовый класс для всех товаров."""
 
     def __init__(self, name, price, description, quantity):
