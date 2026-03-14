@@ -2,9 +2,10 @@
 
 
 from src.base_product import BaseProduct  # ← добавили импорт
+from src.mixins import PrintMixin  # ← импортируем миксин
 
 
-class Product(BaseProduct):
+class Product(PrintMixin, BaseProduct):
     """Базовый класс для всех товаров."""
 
     def __init__(self, name, price, description, quantity):
@@ -13,6 +14,8 @@ class Product(BaseProduct):
         self.description = description
         self._price = price
         self.quantity = quantity
+        super().__init__(name, price, description, quantity)
+
 
     @property
     def price(self):
