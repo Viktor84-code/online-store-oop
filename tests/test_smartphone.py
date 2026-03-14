@@ -3,7 +3,9 @@ from src import Smartphone
 
 def test_smartphone_creation():
     """Тест создания смартфона с доп. атрибутами"""
-    phone = Smartphone("iPhone 15", 210000.0, "512GB, Gray space", 8, 98.2, "15", 512, "Gray space")
+    phone = Smartphone(
+        "iPhone 15", 210000.0, "512GB, Gray space", 8, 98.2, "15", 512, "Gray space"
+    )
 
     assert phone.name == "iPhone 15"
     assert phone.price == 210000.0

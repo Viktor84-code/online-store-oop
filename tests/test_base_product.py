@@ -1,17 +1,21 @@
 """Тесты для абстрактного базового класса BaseProduct."""
 
 import pytest
+
 from src.base_product import BaseProduct
 from src.product import Product
+
 
 def test_base_product_abstract():
     """Проверка, что нельзя создать экземпляр BaseProduct."""
     with pytest.raises(TypeError):
         BaseProduct("Test", 100, "Desc", 5)
 
+
 def test_product_inherits_base():
     """Проверка, что Product является наследником BaseProduct."""
     assert issubclass(Product, BaseProduct)
+
 
 def test_product_implements_abstract_methods():
     """Проверка, что Product реализует все абстрактные методы."""
@@ -36,14 +40,14 @@ def test_product_implements_abstract_methods():
     product.price = 1200.0
     assert product.price == 1200.0
 
+
 def test_base_product_method_signatures():
     """Проверка, что абстрактные методы объявлены правильно."""
-    assert hasattr(BaseProduct, '__init__')
-    assert hasattr(BaseProduct, '__str__')
-    assert hasattr(BaseProduct, '__add__')
-    assert hasattr(BaseProduct, 'price')
+    assert hasattr(BaseProduct, "__init__")
+    assert hasattr(BaseProduct, "__str__")
+    assert hasattr(BaseProduct, "__add__")
+    assert hasattr(BaseProduct, "price")
 
     # Проверяем, что price является property
-    price_attr = getattr(BaseProduct, 'price')
+    price_attr = getattr(BaseProduct, "price")
     assert isinstance(price_attr, property)
-
