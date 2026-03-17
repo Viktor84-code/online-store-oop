@@ -1,10 +1,10 @@
 """Модуль для работы с категориями товаров."""
 
-
+from src.base_collection import BaseCollection
 from src.product import Product
 
 
-class Category:
+class Category(BaseCollection):
     """Класс для описания категории товаров."""
 
     category_count = 0
@@ -12,9 +12,10 @@ class Category:
 
     def __init__(self, name, description, products):
         """Инициализация категории с названием, описанием и списком товаров."""
-        self.name = name
+        super().__init__(name, description)
+        self.name = name  # ← добавить!
         self.description = description
-        self._products = products  # Приватный список (сырые данные)
+        self._products = products
 
         Category.category_count += 1
         Category.product_count += len(products)
@@ -23,7 +24,9 @@ class Category:
         """Добавляет продукт в категорию (только Product и его наследников)."""
         #  можно добавить валидацию
         if not isinstance(product, Product):
-            raise TypeError("Можно добавлять только объекты Product или его наследников")
+            raise TypeError(
+                "Можно добавлять только объекты Product или его наследников"
+            )
         self._products.append(product)
         Category.product_count += 1
 

@@ -1,7 +1,9 @@
 from src import Category, LawnGrass, Product, Smartphone
 
-if __name__ == '__main__':
-    product1 = Product("Samsung Galaxy S23 Ultra", 180000.0, "256GB, Серый цвет, 200MP камера", 5)
+if __name__ == "__main__":
+    product1 = Product(
+        "Samsung Galaxy S23 Ultra", 180000.0, "256GB, Серый цвет, 200MP камера", 5
+    )
     product2 = Product("Iphone 15", 210000.0, "512GB, Gray space", 8)
     product3 = Product("Xiaomi Redmi Note 11", 31000.0, "1024GB, Синий", 14)
 
@@ -12,7 +14,7 @@ if __name__ == '__main__':
     category1 = Category(
         "Смартфоны",
         "Смартфоны, как средство не только коммуникации, но и получения дополнительных функций для удобства жизни",
-        [product1, product2, product3]
+        [product1, product2, product3],
     )
 
     print(str(category1))
@@ -23,10 +25,29 @@ if __name__ == '__main__':
     print(product1 + product3)
     print(product2 + product3)
 
-    smartphone1 = Smartphone("Samsung Galaxy S23 Ultra", 180000.0, "256GB, Серый цвет, 200MP камера", 5, 95.5,
-                             "S23 Ultra", 256, "Серый")
-    smartphone2 = Smartphone("Iphone 15", 210000.0, "512GB, Gray space", 8, 98.2, "15", 512, "Gray space")
-    smartphone3 = Smartphone("Xiaomi Redmi Note 11", 31000.0, "1024GB, Синий", 14, 90.3, "Note 11", 1024, "Синий")
+    smartphone1 = Smartphone(
+        "Samsung Galaxy S23 Ultra",
+        180000.0,
+        "256GB, Серый цвет, 200MP камера",
+        5,
+        95.5,
+        "S23 Ultra",
+        256,
+        "Серый",
+    )
+    smartphone2 = Smartphone(
+        "Iphone 15", 210000.0, "512GB, Gray space", 8, 98.2, "15", 512, "Gray space"
+    )
+    smartphone3 = Smartphone(
+        "Xiaomi Redmi Note 11",
+        31000.0,
+        "1024GB, Синий",
+        14,
+        90.3,
+        "Note 11",
+        1024,
+        "Синий",
+    )
 
     print(smartphone1.name)
     print(smartphone1.description)
@@ -55,8 +76,24 @@ if __name__ == '__main__':
     print(smartphone3.memory)
     print(smartphone3.color)
 
-    grass1 = LawnGrass("Газонная трава", 500.0, "Элитная трава для газона", 20, "Россия", "7 дней", "Зеленый")
-    grass2 = LawnGrass("Газонная трава 2", 450.0, "Выносливая трава", 15, "США", "5 дней", "Темно-зеленый")
+    grass1 = LawnGrass(
+        "Газонная трава",
+        500.0,
+        "Элитная трава для газона",
+        20,
+        "Россия",
+        "7 дней",
+        "Зеленый",
+    )
+    grass2 = LawnGrass(
+        "Газонная трава 2",
+        450.0,
+        "Выносливая трава",
+        15,
+        "США",
+        "5 дней",
+        "Темно-зеленый",
+    )
 
     print(grass1.name)
     print(grass1.description)
@@ -87,8 +124,12 @@ if __name__ == '__main__':
     else:
         print("Не возникла ошибка TypeError при попытке сложения")
 
-    category_smartphones = Category("Смартфоны", "Высокотехнологичные смартфоны", [smartphone1, smartphone2])
-    category_grass = Category("Газонная трава", "Различные виды газонной травы", [grass1, grass2])
+    category_smartphones = Category(
+        "Смартфоны", "Высокотехнологичные смартфоны", [smartphone1, smartphone2]
+    )
+    category_grass = Category(
+        "Газонная трава", "Различные виды газонной травы", [grass1, grass2]
+    )
 
     category_smartphones.add_product(smartphone3)
 

@@ -1,7 +1,10 @@
 """Модуль для работы с продуктами и их наследниками."""
 
+from src.base_product import BaseProduct  # ← добавили импорт
+from src.mixins import PrintMixin  # ← импортируем миксин
 
-class Product:
+
+class Product(PrintMixin, BaseProduct):
     """Базовый класс для всех товаров."""
 
     def __init__(self, name, price, description, quantity):
@@ -10,6 +13,7 @@ class Product:
         self.description = description
         self._price = price
         self.quantity = quantity
+        super().__init__(name, price, description, quantity)
 
     @property
     def price(self):
@@ -74,5 +78,7 @@ class Product:
         if not isinstance(other, Product):
             raise TypeError("Можно складывать только Product с Product")
         if type(self) is not type(other):
-            raise TypeError(f"Нельзя складывать {type(self).__name__} с {type(other).__name__}")
+            raise TypeError(
+                f"Нельзя складывать {type(self).__name__} с {type(other).__name__}"
+            )
         return (self.price * self.quantity) + (other.price * other.quantity)
