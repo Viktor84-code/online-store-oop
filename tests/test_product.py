@@ -106,7 +106,7 @@ def test_product_add_wrong_type():
 def test_price_setter_with_confirmation_yes(monkeypatch):
     """Тест подтверждения понижения цены (ответ 'y')"""
     # Имитируем ввод пользователя 'y'
-    monkeypatch.setattr('builtins.input', lambda _: 'y')
+    monkeypatch.setattr("builtins.input", lambda _: "y")
 
     product = Product("Test", 100, "Desc", 5)
     product.price = 50  # понижаем цену
@@ -116,22 +116,12 @@ def test_price_setter_with_confirmation_yes(monkeypatch):
 
 def test_price_setter_with_confirmation_no(monkeypatch):
     """Тест отказа от понижения цены (ответ 'n')"""
-    monkeypatch.setattr('builtins.input', lambda _: 'n')
+    monkeypatch.setattr("builtins.input", lambda _: "n")
 
     product = Product("Test", 100.0, "Desc", 5)
     product.set_price_with_confirmation(50)  # ← ВОТ ТАК, НЕ product.price = 50
 
     assert product.price == 100.0  # цена не должна измениться
-
-
-def test_price_setter_with_confirmation_yes(monkeypatch):
-    """Тест подтверждения понижения цены (ответ 'y')"""
-    monkeypatch.setattr('builtins.input', lambda _: 'y')
-
-    product = Product("Test", 100.0, "Desc", 5)
-    product.set_price_with_confirmation(50)  # ← ВОТ ТАК
-
-    assert product.price == 50.0  # цена должна измениться
 
 
 def test_price_setter_increase_without_confirmation():

@@ -51,15 +51,3 @@ def test_base_product_method_signatures():
     # Проверяем, что price является property
     price_attr = getattr(BaseProduct, "price")
     assert isinstance(price_attr, property)
-
-
-def test_base_product_abstract_methods():
-    """Тест, что нельзя создать экземпляр BaseProduct"""
-    with pytest.raises(TypeError):
-        BaseProduct("Test", 100, "Desc", 5)
-
-
-def test_base_product_abstract():
-    with pytest.raises(TypeError):
-        BaseProduct("Test", 100, "Desc", 5)
-

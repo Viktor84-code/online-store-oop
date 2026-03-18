@@ -148,19 +148,24 @@ if __name__ == "__main__":
         product_invalid = Product("Бракованный товар", 1000.0, "Неверное количество", 0)
     except ValueError as e:
         print(
-            "Возникла ошибка ValueError прерывающая работу программы при попытке добавить продукт с нулевым количеством")
+            f"Возникла ошибка {e} прерывающая работу программы при попытке добавить продукт с нулевым количеством"
+        )
     else:
-        print("Не возникла ошибка ValueError при попытке добавить продукт с нулевым количеством")
+        print(
+            "Не возникла ошибка ValueError при попытке добавить продукт с нулевым количеством"
+        )
 
-    product1 = Product("Samsung Galaxy S23 Ultra", 180000.0, "256GB, Серый цвет, 200MP камера", 5)
+    product1 = Product(
+        "Samsung Galaxy S23 Ultra", 180000.0, "256GB, Серый цвет, 200MP камера", 5
+    )
     product2 = Product("Iphone 15", 210000.0, "512GB, Gray space", 8)
     product3 = Product("Xiaomi Redmi Note 11", 31000.0, "1024GB, Синий", 14)
 
-    category1 = Category("Смартфоны", "Категория смартфонов", [product1, product2, product3])
+    category1 = Category(
+        "Смартфоны", "Категория смартфонов", [product1, product2, product3]
+    )
 
     print(category1.middle_price())
 
     category_empty = Category("Пустая категория", "Категория без продуктов", [])
     print(category_empty.middle_price())
-
-
