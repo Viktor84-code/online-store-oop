@@ -49,3 +49,11 @@ class Category(BaseCollection):
         """Название категории, количество продуктов: X шт."""
         total_quantity = sum(product.quantity for product in self._products)
         return f"{self.name}, количество продуктов: {total_quantity} шт."
+
+    def middle_price(self):
+        """Средняя цена товаров в категории."""
+        try:
+            total = sum(product.price for product in self._products)
+            return total / len(self._products)
+        except ZeroDivisionError:
+            return 0
