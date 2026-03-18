@@ -93,3 +93,20 @@ def test_products_count():
     category = Category("Смартфоны", "Телефоны", [product1, product2])
 
     assert category.products_count == 2
+
+
+def test_category_add_product_invalid():
+    """Тест добавления не-продукта"""
+    cat = Category("Test", "Desc", [])
+    with pytest.raises(TypeError):
+        cat.add_product("Not a product")
+
+
+def test_middle_price_empty():
+    """Тест middle_price для пустой категории (должен вернуть 0)"""
+    category = Category("Пустая", "Описание", [])
+
+    result = category.middle_price()
+
+    assert result == 0
+    assert isinstance(result, (int, float))  # проверяем что вернулось число

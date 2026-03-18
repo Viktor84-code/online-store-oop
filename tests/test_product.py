@@ -101,3 +101,42 @@ def test_product_add_wrong_type():
 
     with pytest.raises(TypeError):
         product1 + "не товар"
+
+
+def test_price_setter_with_confirmation_yes(monkeypatch):
+    """Тест подтверждения понижения цены (ответ 'y')"""
+    # Имитируем ввод пользователя 'y'
+    monkeypatch.setattr('builtins.input', lambda _: 'y')
+
+    product = Product("Test", 100, "Desc", 5)
+    product.price = 50  # понижаем цену
+
+    assert product.price == 50
+
+
+def test_price_setter_with_confirmation_no(monkeypatch):
+    """Тест отказа от понижения цены (ответ 'n')"""
+    monkeypatch.setattr('builtins.input', lambda _: 'n')
+
+    product = Product("Test", 100.0, "Desc", 5)
+    product.set_price_with_confirmation(50)  # ← ВОТ ТАК, НЕ product.price = 50
+
+    assert product.price == 100.0  # цена не должна измениться
+
+
+def test_price_setter_with_confirmation_yes(monkeypatch):
+    """Тест подтверждения понижения цены (ответ 'y')"""
+    monkeypatch.setattr('builtins.input', lambda _: 'y')
+
+    product = Product("Test", 100.0, "Desc", 5)
+    product.set_price_with_confirmation(50)  # ← ВОТ ТАК
+
+    assert product.price == 50.0  # цена должна измениться
+
+
+def test_price_setter_increase_without_confirmation():
+    """Тест повышения цены (без подтверждения)"""
+    product = Product("Test", 100, "Desc", 5)
+    product.price = 150  # повышаем
+
+    assert product.price == 150
