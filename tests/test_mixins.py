@@ -1,6 +1,6 @@
 """Тесты для миксинов."""
 
-from src import Product, Smartphone, LawnGrass
+from src import LawnGrass, Product, Smartphone
 
 
 def test_print_mixin_product(capsys):
@@ -36,3 +36,9 @@ def test_print_mixin_multiple_objects(capsys):
 
     assert "Product('P1', 100, 'Desc1', 1)" in captured.out
     assert "Product('P2', 200, 'Desc2', 2)" in captured.out
+
+
+def test_mixin_print(capsys):
+    Product("Test", 100, "Desc", 5)
+    captured = capsys.readouterr()
+    assert "Product" in captured.out
